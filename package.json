@@ -1,6 +1,6 @@
 {
   "name": "inject-pilot",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Schematics that migrate your Angular constructor injections to the inject function",
   "type": "module",
   "bin": {
@@ -28,7 +28,6 @@
   "homepage": "https://github.com/kreuzerk/inject-it#readme",
   "dependencies": {
     "chalk": "^5.3.0",
-    "inject-it": "file:inject-it-1.0.0.tgz",
     "ng-morph": "^4.0.6",
     "ora": "^8.0.1"
   },
