@@ -1,13 +1,13 @@
 {
-  "name": "inject-it",
+  "name": "inject-pilot",
   "version": "1.0.0",
   "description": "Schematics that migrate your Angular constructor injections to the inject function",
   "type": "module",
   "bin": {
-    "inject-it": "./inject-it.js"
+    "inject-pilot": "inject-pilot.js"
   },
   "scripts": {
-    "test": "node inject-it.js"
+    "test": "node inject-pilot.js"
   },
   "repository": {
     "type": "git",

@@ -16,7 +16,7 @@ const spinner = ora({
     spinner: 'bluePulse',
 });
 
-async function injectIt() {
+async function injectPilot() {
     console.log(chalk.magenta(`
 ============================================
 💉 inject-it: Dependency Injection Migration
@@ -111,7 +111,7 @@ function fixInjectImport(file) {
 }
 
 try {
-    await injectIt();
+    await injectPilot();
 } catch (e) {
     spinner.fail('Failed to migrate components.');
     console.error(e)
