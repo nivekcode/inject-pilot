@@ -1,0 +1,39 @@
+{
+  "name": "inject-it",
+  "version": "1.0.0",
+  "description": "Schematics that migrate your Angular constructor injections to the inject function",
+  "type": "module",
+  "bin": {
+    "inject-it": "./inject-it.js"
+  },
+  "scripts": {
+    "test": "node inject-it.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kreuzerk/inject-it.git"
+  },
+  "keywords": [
+    "Angular",
+    "Schematics",
+    "Inject",
+    "Dependency",
+    "Injection"
+  ],
+  "author": "Nivek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kreuzerk/inject-it/issues"
+  },
+  "homepage": "https://github.com/kreuzerk/inject-it#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "inject-it": "file:inject-it-1.0.0.tgz",
+    "ng-morph": "^4.0.6",
+    "ora": "^8.0.1"
+  },
+  "devDependencies": {
+    "@angular/core": "^17.1.0",
+    "semver": "^7.5.4"
+  }
+}
