@@ -11,13 +11,12 @@ import {
 } from 'ng-morph';
 import chalk from 'chalk';
 import ora from 'ora';
-import prettier from 'prettier';
 
 const spinner = ora({
     spinner: 'bluePulse',
 });
 
-async function injectIt(){
+async function injectIt() {
     console.log(chalk.magenta(`
 ============================================
 💉 inject-it: Dependency Injection Migration
@@ -62,40 +61,30 @@ async function injectIt(){
     console.log(chalk.bgGreen.white(`
 💉 inject-it: ✅ Successfully migrated all components.
 `));
-console.log(chalk.magenta(`
+    console.log(chalk.magenta(`
 =====================================================
 `));
-};
-
-try {
-    await injectIt();
-} catch (e) {
-    spinner.fail('Failed to migrate components.');
-    console.error(e)
 }
 
-function getInjectStatement(param){
+function getInjectStatement(param) {
     const injectOptions = convertToInjectOptions(param.getDecorators());
-
-    return `inject(${param.getDecorator('Inject')?.getArguments()[0].getText() ??
-    param.getTypeNode()?.getText()}
-    ${Object.keys(injectOptions).length !== 0 ? `,${stringifyObjectWithoutQuotes(injectOptions)})` : ')'}`;
+    return `inject(${param.getDecorator('Inject')?.getArguments()[0].getText() ?? param.getTypeNode()?.getText()}${Object.keys(injectOptions).length !== 0 ? `,${stringifyObjectWithoutQuotes(injectOptions)})` : ')'}`;
 }
 
-function convertToInjectOptions(decorators){
+function convertToInjectOptions(decorators) {
     return decorators.reduce((acc, currentDecorator) => {
-       switch (currentDecorator.getText()){
-              case '@Optional()':
+        switch (currentDecorator.getText()) {
+            case '@Optional()':
                 return {...acc, optional: true}
-              case '@Self()':
+            case '@Self()':
                 return {...acc, self: true}
-              case '@SkipSelf()':
+            case '@SkipSelf()':
                 return {...acc, skipSelf: true}
-              case '@Host()':
+            case '@Host()':
                 return {...acc, host: true}
-              default:
+            default:
                 return acc;
-       }
+        }
     }, {})
 
 }
@@ -104,11 +93,11 @@ function stringifyObjectWithoutQuotes(obj) {
     const keyValuePairs = Object.entries(obj).map(([key, value]) => {
         let formattedValue = value;
         if (typeof value === 'string') {
-            formattedValue = `'${value}'`; // wrap string values in quotes
+            formattedValue = `'${value}'`;
         }
         return `${key}: ${formattedValue}`;
     });
-    return `{ ${keyValuePairs.join(', ')} }`;
+    return `{\n${keyValuePairs.join(',\n')}\n}`;
 }
 
 function fixInjectImport(file) {
@@ -119,4 +108,11 @@ function fixInjectImport(file) {
     editImports(angularCoreImports, (entity) => ({
         namedImports: [...entity.namedImports, 'inject'],
     }));
+}
+
+try {
+    await injectIt();
+} catch (e) {
+    spinner.fail('Failed to migrate components.');
+    console.error(e)
 }
