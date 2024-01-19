@@ -105,10 +105,32 @@ function fixInjectImport(file) {
         moduleSpecifier: '@angular/core',
     });
 
-    editImports(angularCoreImports, (entity) => ({
-        namedImports: [...entity.namedImports, 'inject'],
-    }));
+    if (!isInjectImported(angularCoreImports)) {
+        // if @angular/core has more than one import statement, then add 'inject' import into the first statement
+        const firstCoreImportStatement =
+          angularCoreImports.length > 1
+            ? angularCoreImports[0]
+            : angularCoreImports;
+    
+        editImports(firstCoreImportStatement, (entity) => ({
+          namedImports: [...entity.namedImports, "inject"],
+        }));
+    }
 }
+
+/**
+ * Checks whether the 'inject' fn is already imported in the file.
+ * 
+ * @param {*} angularCoreImports - array of all "@angular/core" imports in the file
+ * @returns boolean - value that confirms if 'inject' is already imported or not
+ */
+function isInjectImported(angularCoreImports) {
+    return angularCoreImports.find((coreImport) =>
+      coreImport
+        .getNamedImports()
+        .find((namedImport) => namedImport.getName() == "inject")
+    );
+  }
 
 try {
     await injectPilot();
