@@ -1,6 +1,6 @@
 {
   "name": "inject-pilot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Schematics that migrate your Angular constructor injections to the inject function",
   "type": "module",
   "bin": {
