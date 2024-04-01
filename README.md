@@ -1,5 +1,8 @@
+# Inject pilot
 
-# Schematics to help you migrate constructor based injections in Angular code bases to inject
+![](logo.webp)
+
+> Schematics to help you migrate constructor based injections in Angular code bases to inject
 
 ## Getting started
 ```
